@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import './Calc.css';
+import './currencyInput.css';
 
-function Calc(props) {
+function CurrencyInput(props) {
   return (
     <div className="group">
       <input type="text" value={props.amount} onChange={ev => props.onAmountChange(ev.target.value)} />
@@ -14,7 +14,7 @@ function Calc(props) {
   );
 }
 
-Calc.propTypes = {
+CurrencyInput.propTypes = {
   amount: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
   currencies: PropTypes.array,
@@ -22,4 +22,4 @@ Calc.propTypes = {
   onCurrencyChange: PropTypes.func,
 };
 
-export default Calc;
+export default CurrencyInput;

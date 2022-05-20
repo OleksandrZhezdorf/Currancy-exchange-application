@@ -1,40 +1,81 @@
-import React, {useEffect, useState} from 'react';
 import './App.css';
-
+import {useState, useEffect} from "react";
+import axios from "axios";
+import CurrencyInput from "./CurrencyInput";
 import Header from './Header/Header';
-import Calc from './Calc/Calc'
 import Footer from './Footer/Footer';
 
-const BASE_URL = 'https://www.cbr-xml-daily.ru/latest.js'
+
+function App() {
+
+  const [amount1, setAmount1] = useState(1);
+  const [amount2, setAmount2] = useState(1);
+  const [currency1, setCurrency1] = useState('USD');
+  const [currency2, setCurrency2] = useState('EUR');
+  const [rates, setRates] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://www.cbr-xml-daily.ru/latest.js')
+      .then(response => {
+        setRates(response.data.rates);
+      })
+  }, []);
+
+  useEffect(() => {
+    if (!!rates) {
+      function init() {
+        handleAmount1Change(1);
+      }
+      init();
+    }
+  }, [rates]);
 
 
 
+  function format(number) {
+    return number.toFixed(2);
+  }
 
-class App extends React.Component {
-  constructor (props) {
-    super (props);
+  function handleAmount1Change(amount1) {
+    setAmount2(format(amount1 * rates[currency2] / rates[currency1]));
+    setAmount1((amount1));
+  }
 
+  function handleCurrency1Change(currency1) {
+    setAmount2(format(amount1 * rates[currency2] / rates[currency1]));
+    setCurrency1(currency1);
+  }
+
+  function handleAmount2Change(amount2) {
+    setAmount1(format(amount2 * rates[currency1] / rates[currency2]));
+    setAmount2(amount2);
+  }
+
+  function handleCurrency2Change(currency2) {
+    setAmount1(format(amount2 * rates[currency1] / rates[currency2]));
+    setCurrency2(currency2);
   }
 
 
-  
-  render() {
-    return (
-    <div className = 'site'>
-     <Header />
-    <div className = 'container'>
-      <main>
-      <div className='calculator'>
-         <h2>Калькулятор</h2>
-        <div className = 'block'>
-          <p>Количество</p>
-          <Calc  />
-        </div>
-      </div>
-      </main>
+  return (
+    <div>
+      <Header />
+      <h1 className='main_head'>Конвертер валют</h1>
+      <CurrencyInput
+        onAmountChange={handleAmount1Change}
+        onCurrencyChange={handleCurrency1Change}
+        currencies={Object.keys(rates)}
+        amount={amount1}
+        currency={currency1} />
+      <CurrencyInput
+        onAmountChange={handleAmount2Change}
+        onCurrencyChange={handleCurrency2Change}
+        currencies={Object.keys(rates)}
+        amount={amount2}
+        currency={currency2} />
+        <Footer />
     </div>
-    <Footer />
-    </div>
-    )}
+  );
 }
+
 export default App;
