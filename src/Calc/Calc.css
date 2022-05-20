@@ -1,0 +1,10 @@
+.calc_input {
+  border: 1px solid black;
+  border-radius: 3em;
+  padding: .25em;
+  width: 7em;
+}
+
+select {
+  margin-left: .5em;
+}
