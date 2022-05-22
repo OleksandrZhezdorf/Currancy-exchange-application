@@ -9,19 +9,19 @@ class Footer extends React.Component {
   
   render() {
     return (
-        <footer id = 'footer' className = 'footer'>
+        <footer className = 'footer'>
           <div className = 'footer-bottom'>
-            <div className = 'flex-item'>
-              <div className = 'module-body'>
-                <ul className = 'list-unstyled'>
+            <div className = 'footer-item'>
+              <div>
+                <ul>
                   <li><a style={{textDecoration: 'none'}} href='/sitemap' tooltip = 'Карта сайта'>Карта сайта</a></li>
                   <li><a style={{textDecoration: 'none'}} href='/sitemaps.xml' target='_blank' tooltip = 'Google Sitemap'>Google Sitemap</a></li>
                 </ul>
               </div>
             </div>
-            <div className = 'flex-item'>
-              <div className = 'module-body'>
-                <ul className = 'list-unstiled'>
+            <div className = 'footer-item'>
+              <div>
+                <ul>
                   <li><a style={{textDecoration: 'none'}} href='/contact/' tooltip = 'Контакты'>Контакты</a></li>
                   <li><a style={{textDecoration: 'none'}} href='/d'>Гарантии</a></li>
                   <li><a style={{textDecoration: 'none'}} href='/s'>О сервисе</a></li>

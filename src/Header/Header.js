@@ -29,13 +29,13 @@ class Header extends React.Component {
   render() {
     return (
       <header className='rate'>
-        <div className = 'container'>
+        <div>
           <h1 className = 'site-title'>Актуальный курс валют на {this.state.date}</h1>
-          <div className = 'flex-container'>
+          <div>
             {Object.keys(this.state.currencyRate).map((keyName, i) => (
-            <div className = 'block flex-item' key = {keyName}>
-              <div className = 'currency-name'>{keyName}</div>
-              <div className = 'currency-in'>{(1/(this.state.currencyRate[keyName]/this.state.currencyRate['UAH'])).toFixed(2)}*</div>
+            <div key = {keyName}>
+              <div>{keyName}</div>
+              <div>{(1/(this.state.currencyRate[keyName]/this.state.currencyRate['UAH'])).toFixed(2)}*</div>
               <p>Курс {keyName} по отношению к гривне</p>
             </div>))}
           </div>
